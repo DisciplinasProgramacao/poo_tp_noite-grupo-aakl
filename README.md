@@ -8,7 +8,7 @@ Desenvolver um sistema de software que possa ser vendido para companhias de stre
 * Ana Paula de Oliveira
 * Kthelly Maievy Aguiar Leite
 * Larissa Soares
-* Victor
+* Victor Augusto Bastos
 
 ## Professores responsáveis
 
