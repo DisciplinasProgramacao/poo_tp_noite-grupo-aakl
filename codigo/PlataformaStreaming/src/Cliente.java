@@ -8,7 +8,7 @@ public class Cliente {
     private List<Serie> interesses = new ArrayList<>();
 
     public Cliente(){
-
+        //return
     }
 
     public Serie buscarSerieAssistida(String nome){
