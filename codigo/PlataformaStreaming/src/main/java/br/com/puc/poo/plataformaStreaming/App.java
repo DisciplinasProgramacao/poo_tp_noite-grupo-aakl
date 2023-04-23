@@ -1,3 +1,5 @@
+package br.com.puc.poo.plataformaStreaming;
+
 import java.util.*;
 
 public class App {

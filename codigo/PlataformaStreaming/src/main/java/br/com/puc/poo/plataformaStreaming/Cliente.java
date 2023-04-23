@@ -1,3 +1,4 @@
+package br.com.puc.poo.plataformaStreaming;
 import java.util.*;
 
 public class Cliente {
@@ -12,10 +13,12 @@ public class Cliente {
     }
 
     public Serie buscarSerieAssistida(String nome){
+		return null;
     
     }
 
     public Serie buscarSerieInteresse(String nome){
+		return null;
 
     }
 
@@ -28,6 +31,7 @@ public class Cliente {
     }
 
     public boolean removerInteresse(Serie serie){
+		return false;
 
     }
 }
