@@ -1,59 +1,45 @@
 import java.util.*;
 
 public class Cliente {
-    
-    private int login;
-    private String senha;
-    private List<Serie> assistidas;
-    private List<Serie> interesses;
 
-    public Cliente(int login, String senha){
-        this.login = login;
-        this.senha = senha;
-        assistidas = new ArrayList<>();
-        interesses = new ArrayList<>();
-    }
+	private int login;
+	private String senha;
+	private List<Serie> assistidas;
+	private List<Serie> interesses;
 
-    public boolean buscarSerieAssistida(Serie serie){
-            if(assistidas.contains(serie)){
-                return true;
-            }
-            
-            return false;
-    }
+	public Cliente() {
+	}
 
-    public boolean buscarSerieInteresse(Serie serie){
-        if(interesses.contains(serie)){
-            return true;
-        }
-        
-        return false;
-    }
+	public int getLogin() {
+		return login;
+	}
 
-    public void adicionarAssistida(Serie serie){
-        if(assistidas.contains(serie)){
-            System.out.println("Série já adicionada!");
-        }
-        else{
-            this.assistidas.add(serie);
-        }
-    }
+	public void setLogin(int login) {
+		this.login = login;
+	}
 
-    public void adicionarInteresse(Serie serie){
-        if (interesses.contains(serie)){
-            System.out.println("Série já adicionada!");
-        }
-        else{
-            this.interesses.add(serie);
-        }
-    }
+	public String getSenha() {
+		return senha;
+	}
 
-    public void removerInteresse(Serie serie){
-        if(interesses.contains(serie)){
-            interesses.remove(serie);
-        }
-        else{
-            System.out.println("Série não está contida na lista!");
-        }
-    }
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public List<Serie> getAssistidas() {
+		return assistidas;
+	}
+
+	public void setAssistidas(List<Serie> assistidas) {
+		this.assistidas = assistidas;
+	}
+
+	public List<Serie> getInteresses() {
+		return interesses;
+	}
+
+	public void setInteresses(List<Serie> interesses) {
+		this.interesses = interesses;
+	}
+
 }
