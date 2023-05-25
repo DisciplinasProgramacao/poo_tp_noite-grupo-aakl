@@ -1,17 +1,36 @@
-import java.util.*;
+
+import java.util.List;
 
 public class Serie {
-    
-    public String nome, genero, idioma;
-    private int contReproducoes;
-    private static final List<String> GENEROS = new ArrayList<>();
-    private static final List<String> IDIOMAS = new ArrayList<>();
 
-    public Serie (){
+	private String nome;
+	private String genero;
+	private String idioma;
+	private Integer contReproducoes;
+	private List<String> generos;
+	private List<String> idiomas;
 
-    }
+	public Serie() {
+	}
 
-    public void incrementarReproducoes(){
-        
-    }
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getIdioma() {
+		return idioma;
+	}
+
+	public void setIdioma(String idioma) {
+		this.idioma = idioma;
+	}
+	
+	public void incrementarReproducoes () {
+		this.contReproducoes +=1;
+	}
+	
 }

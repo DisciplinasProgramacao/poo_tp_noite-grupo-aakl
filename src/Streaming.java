@@ -1,49 +1,59 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Streaming {
-    
-    private HashMap<int, Cliente> clientes;
-    private HashMap<String, Serie> series;
-    private Cliente clienteLogado;
 
-    public Streaming(){
+	private HashMap<Integer, Cliente> clientes;
+	private HashMap<String, Serie> series;
+	private Cliente clienteLogado;
 
-    }
+	public boolean autenticacao(int login, String senha) {
+		return this.clienteLogado.getSenha().equals(senha) 
+				&& this.clienteLogado.getLogin() == login;
+	}
 
-    public boolean autenticacao(int login, String senha){
+	public Serie buscarSeriePorNome(String nome) {
+		return this.series.get(nome);
+	}
 
-    }
+	public List<Serie> buscarSeriesPorGenero(String genero) {
+		return this.series.values().stream()
+				.filter(serie -> genero.equalsIgnoreCase(serie.getNome())).collect(Collectors.toList());
+	}
 
-    public Serie buscarSeriePorNome(String nome){
+	public List<Serie> buscarSeriesPorIdioma(String idioma) {
+		return this.series.values().stream()
+				.filter(serie -> idioma.equalsIgnoreCase(serie.getIdioma())).collect(Collectors.toList());
+	}
 
-    }
+	public List<Serie> buscarSeriesAssistida(Cliente cliente) {
+		return cliente.getAssistidas();
+	}
 
-    public Serie buscarSeriePorGenero(String genero){
-        
-    }
+	public List<Serie> buscarSeriesInteresse(Cliente cliente) {
+		return cliente.getInteresses();
+	}
 
-    public Serie buscarSeriePorIdioma(String idioma){
-        
-    }
+	public void marcarAssistida(String nome) {
+		Serie serie = this.series.get(nome);
+		serie.incrementarReproducoes();
+		this.clienteLogado.getAssistidas().add(serie);
+		
+	}
 
-    public Serie buscarSerieAssistida(String nome){
-        
-    }
+	public void marcarInteresse(String nome) {
+		Serie serie = this.series.get(nome);
+		this.clienteLogado.getInteresses().add(serie);
+	}
 
-    public Serie buscarSerieInteresse(String nome){
-        
-    }
+	public void removerinteresse(Cliente cliente) {
+		
+	}
+	
+//	public void removerInteresse(String nome){
+//		Serie serie = this.series.get(nome);
+//		this.clienteLogado.getInteresses().removeIf(serie -> nome.equalsIgnoreCase(serie.getNome()));
+//����}
 
-    public void marcarAssistida(String nome){
-
-    }
-
-    public void marcarInteresse(String nome){
-        
-    }
-
-    public void removerInteresse(String nome){
-        
-    }
-    
 }
