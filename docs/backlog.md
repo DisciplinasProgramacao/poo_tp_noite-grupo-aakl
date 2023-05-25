@@ -1,8 +1,23 @@
-| Usuário      | Requisito | Motivação     |
-| :----:        |    :----:   |          :----: |
-| Como um XXXXXX, eu quero      | --requsito--       | para...    |
-| Como um XXXXXX, eu quero   | --requisito--         | para...      |
+# Backlog do projeto Trabalho Prático em Grupo - POO
+Atualizado em 25/05/2023
 
+## Tarefas terminadas
 
+| Tarefa      | Responsável |
+| ----------- | ----------- |
+| 1.      |   ✔️     |
+| 2.   |  ✔️       |
+| 3.    |  ✔️       |
+| 4.    |  ✔️       |
+| 5.    |  ✔️       |
+| 6.    |  ✔️       |
+| 7.    |   ✔️      |
+----
 
-> Written with [StackEdit](https://stackedit.io/).
+## Tarefas pendentes (em ordem de prioridade)
+
+| Tarefa      | Responsável |
+| ----------- | ----------- |
+| 1.     |  ➕➖     |
+| 2.    |   ❌    |
+| 3.  |  ➕➖ | 
