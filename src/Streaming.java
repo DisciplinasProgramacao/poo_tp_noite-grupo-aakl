@@ -1,12 +1,22 @@
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Streaming {
 
-	private HashMap<Integer, Cliente> clientes;
-	private HashMap<String, Serie> series;
+	private Map<Integer, IStringConverter> clientes;
+	private Map<String, Serie> series;
 	private Cliente clienteLogado;
+	private Map<Integer, Audiencia> audiencia;
+
+	public void inicializar() {
+		clientes = LeitorCSV.lerCSV(new Cliente(), null);
+	}
+
+	private void carregarDados(IStringConverter dado) {
+
+	} 
 
 	public boolean autenticacao(int login, String senha) {
 		return this.clienteLogado.getSenha().equals(senha) 
