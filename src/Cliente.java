@@ -2,25 +2,26 @@ import java.util.*;
 
 public class Cliente implements IStringConverter{
 
-	private int login;
+	private String login;
 	private String nome;
 	private String senha;
-	private List<Serie> assistidas;
-	private List<Serie> interesses;
+	private List<Serie> assistidas = new ArrayList<Serie>(50);
+	private List<Serie> interesses = new ArrayList<Serie>(50);
 
 	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
-		this.login = Integer.valueOf(login);
+		this.login = login;
 		this.senha = senha;
 	}
 
-	public Cliente() {}
+	public Cliente() {}	 
+	
 
-	public int getLogin() {
+	public String getLogin() {
 		return login;
 	}
 
-	public void setLogin(int login) {
+	public void setLogin(String login) {
 		this.login = login;
 	}
 
@@ -48,6 +49,14 @@ public class Cliente implements IStringConverter{
 		this.interesses = interesses;
 	}
 
+	public void adicionarInteresse(Serie serie) {
+		this.interesses.add(serie);
+	}
+
+	public void adicionarAssistida(Serie serie) {
+		this.assistidas.add(serie);
+	}
+
 	@Override
 	public IStringConverter converterToObject(String dados) {
 		String[] valores = dados.split(";");
@@ -55,7 +64,7 @@ public class Cliente implements IStringConverter{
 	}
 
 	@Override
-	public int getChave() {
+	public String getChave() {
 		return login;
 	}
 
