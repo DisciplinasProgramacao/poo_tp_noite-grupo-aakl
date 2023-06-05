@@ -4,3 +4,7 @@ Versão 01 ![Diagrama UML](https://user-images.githubusercontent.com/104520144/2
 
 Versão 2 contendo a atualização de leitura de arquivos:
 ![POO drawio (3)](https://github.com/DisciplinasProgramacao/poo_tp_noite-grupo-aakl/assets/129699491/eb5e4fad-46cd-4d27-a7e5-32a7e7584b0f)
+
+Versão 3 abrangendo filme de longa-metragem: 
+![Image](https://github.com/DisciplinasProgramacao/poo_tp_noite-grupo-aakl/assets/129699491/5cb05f97-0cdc-45d1-ac64-b426d6f00a65)
+
