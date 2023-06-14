@@ -8,5 +8,4 @@ Versão 2 contendo a atualização de leitura de arquivos:
 Versão 3 abrangendo filme de longa-metragem: 
 ![Image](https://github.com/DisciplinasProgramacao/poo_tp_noite-grupo-aakl/assets/129699491/5cb05f97-0cdc-45d1-ac64-b426d6f00a65)
 
-Versão 4 abrangendo categorias de clientes, gêneros e relatórios genrenciais:
-![Image](https://github.com/DisciplinasProgramacao/poo_tp_noite-grupo-aakl/assets/129699491/fd697507-83ef-42ac-8bd0-afd8006bcfc3)
+Versão 4 abrangendo categorias de clientes, gêneros e relatórios genrenciais: ![Image](https://github.com/DisciplinasProgramacao/poo_tp_noite-grupo-aakl/assets/129699491/480ba2f0-bdd7-46e8-b514-b890242b458c)
