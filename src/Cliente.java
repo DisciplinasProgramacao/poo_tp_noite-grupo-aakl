@@ -1,12 +1,20 @@
 import java.util.*;
-
-public class Cliente implements IStringConverter{
-
+/**
+	 * IMPLEMENTAÇÃO DAS REGRAS PARA AVALIAÇÃO DE MIDIAS:
+	 * 
+	 * 1- UMA MIDIA TEM SUA AVALIAÇÃO MÉDIA; OK
+	 * 2- UM CLIENTE NÃO PODE AVALIAR A MESMA MÍDIA DUAS VEZES; OK
+	 * 3- CLIENTERS PODEM SER REGULARES OU ESPECIALISTAS, E ESTES ÚLTIMOS PODEM ADICIONAR COMENTÁRIOS À AVALIAÇÃO
+	 */
+public class Cliente implements IStringConverter {
+	private String tipoCliente = "Regular";
 	private String login;
 	private String nome;
 	private String senha;
-	private List<Serie> assistidas = new ArrayList<Serie>(50);
-	private List<Serie> interesses = new ArrayList<Serie>(50);
+	private int visualizacoes = 0;
+	private ArrayList<Midia> midiasQueAvaliei = new ArrayList<Midia>();
+	private List<Midia> assistidas = new ArrayList<Midia>(50);
+	private List<Midia> interesses = new ArrayList<Midia>(50);
 
 	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
@@ -16,6 +24,23 @@ public class Cliente implements IStringConverter{
 
 	public Cliente() {}	 
 	
+	
+	public boolean verificaSeAvaliou(Midia midia)
+	{
+		for (Midia m : midiasQueAvaliei) {
+			return m.getChave().equals(midia.getChave()) ? true : false;
+		}
+		return false;
+	}
+	public void addAvaliadas(Midia midia)
+	{
+		this.midiasQueAvaliei.add(midia);
+	}
+
+	private void alterarTipo()
+	{
+		this.tipoCliente = "Especialista";
+	}
 
 	public String getLogin() {
 		return login;
@@ -33,28 +58,36 @@ public class Cliente implements IStringConverter{
 		this.senha = senha;
 	}
 
-	public List<Serie> getAssistidas() {
+	public List<Midia> getAssistidas() {
 		return assistidas;
 	}
 
-	public void setAssistidas(List<Serie> assistidas) {
+	public void setAssistidas(List<Midia> assistidas) {
 		this.assistidas = assistidas;
 	}
 
-	public List<Serie> getInteresses() {
+	public List<Midia> getInteresses() {
 		return interesses;
 	}
 
-	public void setInteresses(List<Serie> interesses) {
+	public void setInteresses(List<Midia> interesses) {
 		this.interesses = interesses;
 	}
 
-	public void adicionarInteresse(Serie serie) {
+	public void adicionarInteresse(Midia serie) {
 		this.interesses.add(serie);
 	}
 
-	public void adicionarAssistida(Serie serie) {
+	public void adicionarAssistida(Midia serie) {
 		this.assistidas.add(serie);
+		this.atualizaVisualizacao();
+	}
+	/**
+	 * Atualiza visualização da série
+	 */
+	private void atualizaVisualizacao()
+	{
+		this.visualizacoes++;
 	}
 
 	@Override
@@ -66,6 +99,22 @@ public class Cliente implements IStringConverter{
 	@Override
 	public String getChave() {
 		return login;
+	}
+
+	/**
+	 * Retorna o tipo de cliente
+	 * @return String
+	 */
+	public String getTipoCliente() {
+		return tipoCliente;
+	}
+
+	/**
+	 * Retorna o nome do cliente
+	 * @return String
+	 */
+	public String getNome() {
+		return nome;
 	}
 
 }
