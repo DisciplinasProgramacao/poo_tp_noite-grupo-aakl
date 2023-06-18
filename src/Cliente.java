@@ -5,8 +5,8 @@ public class Cliente implements IStringConverter{
 	private String login;
 	private String nome;
 	private String senha;
-	private List<Serie> assistidas = new ArrayList<Serie>(50);
-	private List<Serie> interesses = new ArrayList<Serie>(50);
+	private List<Midia> assistidas = new ArrayList<Midia>(50);
+	private List<Midia> interesses = new ArrayList<Midia>(50);
 
 	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
@@ -33,27 +33,27 @@ public class Cliente implements IStringConverter{
 		this.senha = senha;
 	}
 
-	public List<Serie> getAssistidas() {
+	public List<Midia> getAssistidas() {
 		return assistidas;
 	}
 
-	public void setAssistidas(List<Serie> assistidas) {
+	public void setAssistidas(List<Midia> assistidas) {
 		this.assistidas = assistidas;
 	}
 
-	public List<Serie> getInteresses() {
+	public List<Midia> getInteresses() {
 		return interesses;
 	}
 
-	public void setInteresses(List<Serie> interesses) {
+	public void setInteresses(List<Midia> interesses) {
 		this.interesses = interesses;
 	}
 
-	public void adicionarInteresse(Serie serie) {
+	public void adicionarInteresse(Midia serie) {
 		this.interesses.add(serie);
 	}
 
-	public void adicionarAssistida(Serie serie) {
+	public void adicionarAssistida(Midia serie) {
 		this.assistidas.add(serie);
 	}
 
