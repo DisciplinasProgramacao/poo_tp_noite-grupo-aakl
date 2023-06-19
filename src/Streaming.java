@@ -134,6 +134,9 @@ public class Streaming {
 
 	}
 
+	public void avaliar(Midia midia) {
+		avaliarMidia(clienteLogado, midia);
+	}
 
 
 	public void avaliarMidia(Cliente cliente, Midia midia)
