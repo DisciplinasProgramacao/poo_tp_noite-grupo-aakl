@@ -12,6 +12,7 @@ public abstract class Midia implements IStringConverter{
 	private LocalDate dataLancamento;
 	private List<String> generos;
 	private List<String> idiomas;
+	private boolean isLancamento;
 
 	public Midia() {}
 
@@ -38,6 +39,7 @@ public abstract class Midia implements IStringConverter{
 	}
 	
 	public void incrementarReproducoes () {
+		
 		this.contReproducoes +=1;
 	}
 
@@ -46,5 +48,9 @@ public abstract class Midia implements IStringConverter{
 	@Override
 	public String getChave() {
 		return idMidia;
+	}
+
+	public boolean isLancamento() {
+		return isLancamento;
 	}
 }

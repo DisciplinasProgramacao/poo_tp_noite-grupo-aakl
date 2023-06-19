@@ -48,6 +48,8 @@ public class Streaming {
 		}
 	}
 
+
+
 	private void registrarReproducao(Cliente cliente, Midia serie) {
 		serie.incrementarReproducoes();
 		cliente.adicionarAssistida(serie);
@@ -81,10 +83,19 @@ public class Streaming {
 		return cliente.getInteresses();
 	}
 
-	public void marcarAssistida(String nome) {
-		Midia serie = this.midias.get(nome);
-		serie.incrementarReproducoes();
-		this.clienteLogado.getAssistidas().add(serie);
+	public void marcarAssistida(String nome) throws Exception {
+		Midia midia = this.midias.get(nome);
+		if(!midia.isLancamento() || (lancamentoPodeSerReproduzido())){
+			midia.incrementarReproducoes();
+			this.clienteLogado.getAssistidas().add(midia);	
+		}
+		else {
+			throw new Exception("Usuário não tem permissão para assistir lançamentos.");
+		}
+	}
+
+	private boolean lancamentoPodeSerReproduzido() {
+		return this.clienteLogado.gCategoria().equals(Categorias.PROFISSIONAL) ? true : false;
 	}
 
 	public void marcarInteresse(String nome) {
