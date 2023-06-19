@@ -1,3 +1,4 @@
+import java.io.EOFException;
 import java.util.*;
 /**
 	 * IMPLEMENTAÇÃO DAS REGRAS PARA AVALIAÇÃO DE MIDIAS:
@@ -93,13 +94,51 @@ public class Cliente implements IStringConverter {
 		this.interesses = interesses;
 	}
 
-	public void adicionarInteresse(Midia serie) {
+	public boolean midiaJaAdicionada(Midia midia, List<Midia> listaMidia) {
+		return assistidas.stream().filter(midiaVista -> midiaVista.getID().equals(midia)).findAny().isPresent();
+	}
+
+	public boolean adicionarInteresse(Midia midia) throws Exception {
+		boolean resultado = true;
+		if(!midiaJaAdicionada(midia, interesses)) {
+			this.interesses.add(midia);
+		}
+		else {
+			resultado = false;
+			throw new Exception("Midia já adicionada");
+		}
+		return resultado;
+	}
+
+	public void registraInteresse(Midia serie) {
 		this.interesses.add(serie);
 	}
 
-	public void adicionarAssistida(Midia serie) {
+	public void registraAssistida(Midia serie) {
 		this.assistidas.add(serie);
 		this.atualizaVisualizacao();
+	}
+
+	public boolean adicionarAssistida(Midia midia) throws Exception {
+		boolean resultado = true;
+		if(!midiaJaAdicionada(midia, assistidas)) {
+			this.assistidas.add(midia);
+			this.atualizaVisualizacao();
+			midia.incrementarReproducoes();
+		}
+		else {
+			resultado = false;
+			throw new Exception("Midia já adicionada");
+		}
+		return resultado;
+	}
+
+	public Midia buscaMidiaAssistida(String nome) {
+		return assistidas.stream().filter(midia -> midia.getNome().equals(nome)).findAny().get();
+	}
+
+	public Midia buscaMidiaInteresse(String nome) {
+		return interesses.stream().filter(midia -> midia.getNome().equals(nome)).findAny().get();
 	}
 	/**
 	 * Atualiza visualização da série

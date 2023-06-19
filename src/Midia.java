@@ -36,6 +36,10 @@ public abstract class Midia implements IStringConverter{
 			this.avaliacaoMedia = soma/this.avaliacoes.size();
 		}
 	}
+
+	public String getID() {
+		return idMidia;
+	}
 	
 	public void avaliarMidia(Avaliacao avaliacao)
 	{
@@ -68,7 +72,7 @@ public abstract class Midia implements IStringConverter{
 
 	@Override
 	public String getChave() {
-		return this.idMidia;
+		return this.nome;
 	}
 
 	/**
