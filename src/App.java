@@ -13,9 +13,6 @@ public class App {
             operacao = menu();
             executaOpcao(operacao);
         }while(operacao != 0);
-        
-   
-        
     }
 
     private static void executaOpcao(int opcao) {
@@ -37,7 +34,24 @@ public class App {
             buscarMidiaNaLista(false);
             break;
 
+            case 5: 
+            avaliarMidia();
+            break;
 
+
+        }
+    }
+
+    private static void avaliarMidia() {
+        limpaBuffer();
+        System.out.println("Informe o nome da mídia: ");
+        String midia = sc.nextLine();
+        try {
+                Midia midiaSelecionada = plataforma.buscaMidiaNalista(midia, true);
+                plataforma.avaliar(midiaSelecionada);
+            
+        } catch (Exception e) {
+            System.out.printf("Erro: %s", e.getMessage());
         }
     }
 
@@ -80,6 +94,7 @@ public class App {
         System.out.println("2. Adicionar mídia à lista de interesses");
         System.out.println("3. Buscar mídia assistida");
         System.out.println("4. Busca mídia na lista de interesse");
+        System.out.println("5. Avaliar");
 
         return sc.nextInt();
     }
