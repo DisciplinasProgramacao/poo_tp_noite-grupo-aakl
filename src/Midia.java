@@ -1,17 +1,21 @@
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-
+	
 public abstract class Midia implements IStringConverter{
 
 	private String idMidia;
 	private String nome;
 	private String genero;
+	private ArrayList<Avaliacao> avaliacoes = new ArrayList<Avaliacao>();
 	private String idioma;
 	private int contReproducoes = 0;
 	private LocalDate dataLancamento;
 	private List<String> generos;
 	private List<String> idiomas;
+	private double avaliacaoMedia;
+	private int soma;
 	private boolean isLancamento;
 
 	public Midia() {}
@@ -22,8 +26,26 @@ public abstract class Midia implements IStringConverter{
 		this.dataLancamento = Utils.converteStringParaData(dataLancamento);
 	}
 
+	/**
+	 * Este método calcula a média das avaliações de uma mídia
+	 */
+	public void calculaMediaAvaliacoes()
+	{
+		this.soma = this.avaliacoes.stream().mapToInt(i -> i.getNota()).sum();
+		if(this.avaliacoes.size() != 0) {
+			this.avaliacaoMedia = soma/this.avaliacoes.size();
+		}
+	}
+	
+	public void avaliarMidia(Avaliacao avaliacao)
+	{
+		this.avaliacoes.add(avaliacao);
+	}
+
+
+
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -39,7 +61,6 @@ public abstract class Midia implements IStringConverter{
 	}
 	
 	public void incrementarReproducoes () {
-		
 		this.contReproducoes +=1;
 	}
 
@@ -47,7 +68,15 @@ public abstract class Midia implements IStringConverter{
 
 	@Override
 	public String getChave() {
-		return idMidia;
+		return this.idMidia;
+	}
+
+	/**
+	 * Retorna a média das avaliações desta mídia
+	 * @return double
+	 */
+	public double getAvaliacaoMedia() {
+		return avaliacaoMedia;
 	}
 
 	public boolean isLancamento() {

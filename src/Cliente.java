@@ -1,10 +1,18 @@
 import java.util.*;
-
-public class Cliente implements IStringConverter{
-
+/**
+	 * IMPLEMENTAÇÃO DAS REGRAS PARA AVALIAÇÃO DE MIDIAS:
+	 * 
+	 * 1- UMA MIDIA TEM SUA AVALIAÇÃO MÉDIA; OK
+	 * 2- UM CLIENTE NÃO PODE AVALIAR A MESMA MÍDIA DUAS VEZES; OK
+	 * 3- CLIENTERS PODEM SER REGULARES OU ESPECIALISTAS, E ESTES ÚLTIMOS PODEM ADICIONAR COMENTÁRIOS À AVALIAÇÃO
+	 */
+public class Cliente implements IStringConverter {
+	private String tipoCliente = "Regular";
 	private String login;
 	private String nome;
 	private String senha;
+	private int visualizacoes = 0;
+	private ArrayList<Midia> midiasQueAvaliei = new ArrayList<Midia>();
 	private List<Midia> assistidas = new ArrayList<Midia>(50);
 	private List<Midia> interesses = new ArrayList<Midia>(50);
 	private Categorias categoria;
@@ -35,6 +43,23 @@ public class Cliente implements IStringConverter{
 	}
 	public Cliente() {}	 
 	
+	
+	public boolean verificaSeAvaliou(Midia midia)
+	{
+		for (Midia m : midiasQueAvaliei) {
+			return m.getChave().equals(midia.getChave()) ? true : false;
+		}
+		return false;
+	}
+	public void addAvaliadas(Midia midia)
+	{
+		this.midiasQueAvaliei.add(midia);
+	}
+
+	private void alterarTipo()
+	{
+		this.tipoCliente = "Especialista";
+	}
 
 	public String getLogin() {
 		return login;
@@ -74,6 +99,14 @@ public class Cliente implements IStringConverter{
 
 	public void adicionarAssistida(Midia serie) {
 		this.assistidas.add(serie);
+		this.atualizaVisualizacao();
+	}
+	/**
+	 * Atualiza visualização da série
+	 */
+	private void atualizaVisualizacao()
+	{
+		this.visualizacoes++;
 	}
 
 	@Override
@@ -85,6 +118,22 @@ public class Cliente implements IStringConverter{
 	@Override
 	public String getChave() {
 		return login;
+	}
+
+	/**
+	 * Retorna o tipo de cliente
+	 * @return String
+	 */
+	public String getTipoCliente() {
+		return tipoCliente;
+	}
+
+	/**
+	 * Retorna o nome do cliente
+	 * @return String
+	 */
+	public String getNome() {
+		return nome;
 	}
 
 }

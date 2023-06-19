@@ -9,6 +9,7 @@ public class Streaming {
 	private Map<String, Midia> midias;
 	private Cliente clienteLogado;
 
+
 	public Streaming() {
 		inicializar();
 	}
@@ -75,12 +76,12 @@ public class Streaming {
 				.filter(serie -> idioma.equalsIgnoreCase(serie.getIdioma())).collect(Collectors.toList());
 	}
 
-	public List<Midia> buscarMidiasAssistida(Cliente cliente) {
-		return cliente.getAssistidas();
+	public List<Serie> buscarSeriesAssistida(Cliente cliente) {
+		return this.buscarSeriesAssistida(cliente);
 	}
 
-	public List<Midia> buscarMidiasInteresse(Cliente cliente) {
-		return cliente.getInteresses();
+	public List<Serie> buscarSeriesInteresse(Cliente cliente) {
+		return this.buscarSeriesInteresse(cliente);
 	}
 
 	public void marcarAssistida(String nome) throws Exception {
@@ -107,10 +108,33 @@ public class Streaming {
 
 	}
 
-	// public void removerInteresse(String nome){
-	// Serie serie = this.Midias.get(nome);
-	// this.clienteLogado.getInteresses().removeIf(serie ->
-	// nome.equalsIgnoreCase(serie.getNome()));
-	// ����}
+
+
+	public void avaliarMidia(Cliente cliente, Midia midia)
+	{
+		if(!cliente.verificaSeAvaliou(midia))
+		{
+			System.out.print("Informe uma nota para esta mídia: ");
+			int nota = Integer.parseInt(App.sc.nextLine());
+			Avaliacao a = new Avaliacao(nota);
+			
+			if(cliente.getTipoCliente().toLowerCase().equals("especialista"))
+			{
+				System.out.print("Adicione um comentário: ");
+				String comentario = App.sc.nextLine();
+				a.addComentario(comentario);
+			}
+			cliente.addAvaliadas(midia);
+			midia.avaliarMidia(a);
+		} else {
+			System.out.println("Esta mídia já foi avaliada por " + cliente.getNome());
+		}
+		
+	}
+	
+//	public void removerInteresse(String nome){
+//		Serie serie = this.series.get(nome);
+//		this.clienteLogado.getInteresses().removeIf(serie -> nome.equalsIgnoreCase(serie.getNome()));
+//����}
 
 }
