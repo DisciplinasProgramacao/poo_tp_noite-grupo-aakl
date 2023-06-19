@@ -19,6 +19,8 @@ public class Cliente implements IStringConverter {
 	private Categorias categoria;
 	private boolean profissional;
 	private int quantAvaliacoesMes;
+	private List<String> avaliadas = new ArrayList<String>();
+	private Integer avaliacao;
 
 	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
