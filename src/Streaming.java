@@ -1,13 +1,15 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Streaming {
-
+	static Scanner sc = new Scanner(System.in);
 	private Map<String, Cliente> clientes;
 	private Map<String, Midia> midias;
 	private Cliente clienteLogado;
+	private Cliente clienteQueViuMaiorQuantidade = null;
 
 
 	public Streaming() {
@@ -160,5 +162,62 @@ public class Streaming {
 //		Serie serie = this.series.get(nome);
 //		this.clienteLogado.getInteresses().removeIf(serie -> nome.equalsIgnoreCase(serie.getNome()));
 //����}
+
+
+	public void relatoriosGerenciais() {
+		int opcao = opcoesRelatorioGerenciais();
+		
+		switch (opcao) {
+		/*case 1:
+			this.clientes.values().forEach(c -> {
+
+				if(c.getAssistidas().size() > this.clienteQueViuMaiorQuantidade.getAssistidas().size()) {
+					clienteQueViuMaiorQantidade = c;
+				}
+			});
+			System.out.println("O cliente que assistiu a maior quantidade de mídias é : " + this.clienteQueViuMaiorQuantidade.getLogin() + "\n" +
+								"E assistiu um total de : " + this.clienteQueViuMaiorQuantidade.quantidadeTotalMidiaAssistida());
+			break;
+		case 2:
+			Cliente clienteMaisAvaliacao = this.clientes.values().stream()
+										.collect(Collectors.maxBy(Comparator.comparingInt(Cliente:: getAvaliacao))).orElse(new Cliente());
+			System.out.println("O cliente que possui o maior numero de avaliações é : " + clienteMaisAvaliacao.getLogin() + "\n" +
+					"E tem um total de : " + clienteMaisAvaliacao.getAvaliacao());
+			break;
+		case 3:
+			Integer quantidade = this.clientes.values().stream()
+			.filter(c -> c.getAvaliacao() >= 15).collect(Collectors.reducing(0, e -> 1, Integer::sum));
+			Integer total = (quantidade/this.clientes.values().size())*100;
+			System.out.println("A porcentagem de clientes com pelo menos 15 avaliações é de:  " + total);
+			break;*/
+		case 4:
+			break;
+		case 5:
+			break;
+		case 6:
+			break;
+		case 7:
+			break;
+		}
+		
+	}
+	
+	private Object compareTo() {
+		return null;
+	}
+
+	public static Integer opcoesRelatorioGerenciais() {
+		int opcao;
+		System.out.println("Escolha o número do  relatório gerencial que deseja consultar: \n"
+				+ "1 - Qual cliente assistiu mais mídias, e quantas mídias; \n"
+				+ "2 - Qual cliente tem mais avaliações, e quantas avaliações; \n"
+				+ "3 - Quais são as 10 mídias com a melhor média de avaliações e que tenham sido vistas pelo menos 100 vezes, apresentadas em ordem decrescente;\n" 
+				+ "4 - Qual a porcentagem dos clientes com pelo menos 15 avaliações;\n" 
+				+ "5 - Quais são as 10 mídias com mais visualizações, em ordem decrescente;\n"
+				+ "6 - Quais são as 10 mídias com mais visualizações, em ordem decrescente e por gênero\n"
+				+ "7 - Quais são as 10 mídias com a melhor média de avaliações e que tenham sido vistas pelo menos 100 vezes, apresentadas em ordem decrescentee por gênero\n");
+		opcao = sc.nextInt();
+		return opcao;
+	}
 
 }
