@@ -7,13 +7,32 @@ public class Cliente implements IStringConverter{
 	private String senha;
 	private List<Midia> assistidas = new ArrayList<Midia>(50);
 	private List<Midia> interesses = new ArrayList<Midia>(50);
+	private Categorias categoria;
+	private boolean profissional;
+	private int quantAvaliacoesMes;
 
 	public Cliente(String nome, String login, String senha) {
 		this.nome = nome;
 		this.login = login;
 		this.senha = senha;
+		categoria = Categorias.defineCategoria(this);	
 	}
 
+	public int getQuatidadeAvaliacoes() {
+		return quantAvaliacoesMes;
+	}
+
+	public void setProfissional() {
+		profissional = true;
+	}
+
+	public boolean isProfissional() {
+		return profissional;
+	}
+
+	public Categorias gCategoria() {
+		return categoria;
+	}
 	public Cliente() {}	 
 	
 
