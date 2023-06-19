@@ -42,28 +42,31 @@ public class Streaming {
 				if (valores[1].equals("A")) {
 					registrarReproducao(cliente, serie);
 				} else {
-					cliente.adicionarInteresse(serie);
+					cliente.registraInteresse(serie);
 				}
 			}
 
 		}
 	}
 
-
+	
 
 	private void registrarReproducao(Cliente cliente, Midia serie) {
-		serie.incrementarReproducoes();
-		cliente.adicionarAssistida(serie);
+		cliente.registraAssistida(serie);
 	}
 
 	public boolean autenticacao(String login, String senha) {
-		return this.clienteLogado.getSenha().equals(senha)
-				&& this.clienteLogado.getLogin().equals(login);
+		boolean autendicado = false;
+		
+		if(clientes.containsKey(login)) {
+			if(clientes.get(login).getSenha().equals(senha)) {
+				clienteLogado = clientes.get(login);
+				autendicado = true;
+			}
+		}
+		return autendicado;
 	}
 
-	public Midia buscarMidiaPorNome(String nome) {
-		return this.midias.get(nome);
-	}
 
 	public List<Midia> buscarMidiasPorGenero(String genero) {
 
@@ -84,13 +87,34 @@ public class Streaming {
 		return this.buscarSeriesInteresse(cliente);
 	}
 
-	public void marcarAssistida(String nome) throws Exception {
-		Midia midia = this.midias.get(nome);
-		if(!midia.isLancamento() || (lancamentoPodeSerReproduzido())){
-			midia.incrementarReproducoes();
-			this.clienteLogado.getAssistidas().add(midia);	
+	public Midia buscaMidiaNalista(String nome, boolean ehAssistida) {
+		Midia midia;
+		if(ehAssistida) {
+			midia = clienteLogado.buscaMidiaAssistida(nome);
 		}
 		else {
+			midia = clienteLogado.buscaMidiaInteresse(nome);
+		}
+		return midia;
+	}
+
+	public void addMidiaAlista(String nome, boolean jaAssitida) throws Exception {
+		Midia midia = this.midias.get(nome);
+		if(midia == null) {
+			throw new Exception("Mídia não encontrada");
+		}
+		
+		ehlancamento(midia);
+		if(jaAssitida) {
+			clienteLogado.adicionarAssistida(midia);
+		}
+		else {
+			clienteLogado.adicionarInteresse(midia);
+		}
+	}
+
+	private void ehlancamento(Midia midia) throws Exception {
+		if(midia.isLancamento() && !lancamentoPodeSerReproduzido()){
 			throw new Exception("Usuário não tem permissão para assistir lançamentos.");
 		}
 	}
