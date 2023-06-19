@@ -16,6 +16,7 @@ public abstract class Midia implements IStringConverter{
 	private List<String> idiomas;
 	private double avaliacaoMedia;
 	private int soma;
+	private boolean isLancamento;
 
 	public Midia() {}
 
@@ -76,5 +77,9 @@ public abstract class Midia implements IStringConverter{
 	 */
 	public double getAvaliacaoMedia() {
 		return avaliacaoMedia;
+	}
+
+	public boolean isLancamento() {
+		return isLancamento;
 	}
 }
