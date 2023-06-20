@@ -1,14 +1,30 @@
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class App {
     public static Scanner sc = new Scanner(System.in);
     private static Streaming plataforma;
+
+    /**
+     * Método para "limpar" tela console
+     */
+    public static void limparTela() {
+
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static void timer(int segundos) throws Exception
+    {
+        TimeUnit.SECONDS.sleep(segundos);
+    }
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        limparTela();
         plataforma = new Streaming();
         int operacao;
         autenticacao();
 
+            limparTela();
         do{
             operacao = menu();
             executaOpcao(operacao);
@@ -19,23 +35,24 @@ public class App {
 
         switch(opcao) {
             case 1:
-            addMidiaAlista(true);
-                break;
+                addMidiaAlista(true);
+            break;
 
             case 2: 
-            addMidiaAlista(true);
-                break;
+                addMidiaAlista(true);
+            break;
 
             case 3: 
-            buscarMidiaNaLista(true);
+                buscarMidiaNaLista(true);
             break;
 
             case 4: 
-            buscarMidiaNaLista(false);
+                buscarMidiaNaLista(false);
             break;
 
             case 5: 
-            avaliarMidia();
+                limparTela();
+                avaliarMidia();
             break;
 
 
@@ -43,12 +60,12 @@ public class App {
     }
 
     private static void avaliarMidia() {
-        limpaBuffer();
         System.out.println("Informe o nome da mídia: ");
         String midia = sc.nextLine();
         try {
                 Midia midiaSelecionada = plataforma.buscaMidiaNalista(midia, true);
                 plataforma.avaliar(midiaSelecionada);
+                System.out.println("Mídia avaliada com sucesso!");
             
         } catch (Exception e) {
             System.out.printf("Erro: %s", e.getMessage());
@@ -56,7 +73,6 @@ public class App {
     }
 
     private static void buscarMidiaNaLista(boolean ehAssistida) {
-        limpaBuffer();
         System.out.println("Informe o nome da mídia: ");
         String midia = sc.nextLine();
         try {
@@ -73,7 +89,6 @@ public class App {
     }
 
     private static void addMidiaAlista(boolean jaAssistida) {
-        limpaBuffer();
         System.out.println("Informe o nome da mídia: ");
         String midia = sc.nextLine();
         try {
@@ -83,33 +98,55 @@ public class App {
         } catch (Exception e) {
             System.out.printf("Erro: %s", e.getMessage());
         }
-        
     }
 
 
 
     private static int menu() {
-        System.out.println("******* Plataforma Streaming *********");
-        System.out.println("1. Adicionar mídia assistida");
-        System.out.println("2. Adicionar mídia à lista de interesses");
-        System.out.println("3. Buscar mídia assistida");
-        System.out.println("4. Busca mídia na lista de interesse");
-        System.out.println("5. Avaliar");
+        try {
+            int op = -1;
+            do {
+                limparTela();
+                System.out.println("******* Plataforma Streaming *********");
+                System.out.println("1. Adicionar mídia assistida");
+                System.out.println("2. Adicionar mídia à lista de interesses");
+                System.out.println("3. Buscar mídia assistida");
+                System.out.println("4. Busca mídia na lista de interesse");
+                System.out.println("5. Avaliar");
+                op = Integer.parseInt(sc.nextLine());
 
-        return sc.nextInt();
+                if(op < 0 || op > 5)
+                {
+                    limparTela();
+                    System.out.println("Opção informada não existe. Tente novamente");
+                    timer(2);
+                }
+
+            } while (op < 0 || op > 5);
+            
+            return op;
+        } catch (Exception e) {
+            System.out.println("A opção '" + sc + "' não existe");
+           return -1;
+        }
     }
 
     public static void autenticacao() throws Exception {
-        System.out.println("Informe o login: ");
+        limparTela();
+        System.out.print("Informe o login: ");
         String login = sc.nextLine();
-        System.out.println("Informe a senha: ");
+        System.out.print("Informe a senha: ");
         String senha = sc.nextLine();
         
         if(plataforma.autenticacao(login, senha)) {
             System.out.println("Login realizado com sucesso!");
+            return;
         }
         else {
-            throw new Exception("Usuário ou senha inválidos");
+            limparTela();
+            System.out.println("Usuário ou senha inválidos. Tente novamente.");
+            timer(2);
+            autenticacao();
         }
     }
 }
