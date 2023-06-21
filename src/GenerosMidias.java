@@ -19,4 +19,18 @@ public enum GenerosMidias {
     public String getGenero() {
         return this.genero;
     }
+
+    public static GenerosMidias getGeneroPorIndex(int index){
+        
+        GenerosMidias generoEscolhido = null;
+        int i = 0;
+
+        for (GenerosMidias genero : GenerosMidias.values()) {
+            if(index - 1 == i){
+               generoEscolhido = genero;
+            }
+            i++;
+        }
+        return generoEscolhido; 
+    }
 }

@@ -55,6 +55,10 @@ public class App {
                 avaliarMidia();
             break;
 
+            case 6:
+            plataforma.relatoriosGerenciais();
+            break;
+
 
         }
     }
@@ -113,6 +117,7 @@ public class App {
                 System.out.println("3. Buscar mídia assistida");
                 System.out.println("4. Busca mídia na lista de interesse");
                 System.out.println("5. Avaliar");
+                System.out.println("6. Relatórios Gerenciais");
                 op = Integer.parseInt(sc.nextLine());
 
                 if(op < 0 || op > 5)

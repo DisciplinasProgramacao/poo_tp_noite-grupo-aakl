@@ -1,3 +1,4 @@
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -167,49 +168,109 @@ public class Streaming {
 //����}
 
 
-	public void relatoriosGerenciais() {
-		int opcao = opcoesRelatorioGerenciais();
-		
-		switch (opcao) {
-		/*case 1:
-			this.clientes.values().forEach(c -> {
+public void relatoriosGerenciais() {
+	int opcao = opcoesRelatoriosGerenciais();
+	
+	switch (opcao) {
+	case 1:
+		System.out.println("O cliente que assistiu mais mídias é o: " + this.clientes.values().stream()
+							.max((c,c1) -> Integer.compare(c.getAssistidas().size(), c1.getAssistidas().size()))
+							.get().getNome()
+							);
+		System.out.println("Ele assistiu: " + this.clientes.values().stream()
+							.max((c,c1) -> Integer.compare(c.getAssistidas().size(), c1.getAssistidas().size()))
+							.get().getAssistidas().size());
 
-				if(c.getAssistidas().size() > this.clienteQueViuMaiorQuantidade.getAssistidas().size()) {
-					clienteQueViuMaiorQantidade = c;
-				}
-			});
-			System.out.println("O cliente que assistiu a maior quantidade de mídias é : " + this.clienteQueViuMaiorQuantidade.getLogin() + "\n" +
-								"E assistiu um total de : " + this.clienteQueViuMaiorQuantidade.quantidadeTotalMidiaAssistida());
-			break;
-		case 2:
-			Cliente clienteMaisAvaliacao = this.clientes.values().stream()
-										.collect(Collectors.maxBy(Comparator.comparingInt(Cliente:: getAvaliacao))).orElse(new Cliente());
-			System.out.println("O cliente que possui o maior numero de avaliações é : " + clienteMaisAvaliacao.getLogin() + "\n" +
-					"E tem um total de : " + clienteMaisAvaliacao.getAvaliacao());
-			break;
-		case 3:
-			Integer quantidade = this.clientes.values().stream()
-			.filter(c -> c.getAvaliacao() >= 15).collect(Collectors.reducing(0, e -> 1, Integer::sum));
-			Integer total = (quantidade/this.clientes.values().size())*100;
-			System.out.println("A porcentagem de clientes com pelo menos 15 avaliações é de:  " + total);
-			break;*/
-		case 4:
-			break;
-		case 5:
-			break;
-		case 6:
-			break;
-		case 7:
-			break;
+		break;
+	case 2:
+		System.out.println("O cliente que possui o maior número de avaliações é o: " + this.clientes.values().stream()
+							.max((c,c1) -> Integer.compare(c.getQuatidadeAvaliacoes(), c1.getQuatidadeAvaliacoes()))
+							.get().getNome()
+							);
+		System.out.println("Ele possui: " + this.clientes.values().stream()
+											.max((c,c1) -> Integer.compare(c.getQuatidadeAvaliacoes(), c1.getQuatidadeAvaliacoes()))
+							.get().getQuatidadeAvaliacoes() + " avaliações.");
+		break;
+	case 3:
+		List<Midia> midiasMaisAvaliadas = this.clientes.values().stream()
+								.flatMap(c -> c.getMidiasQueAvaliei().stream())
+								.filter(m -> m.getVizualizacoes() >= 100)
+								.collect(Collectors.toList()).stream()
+								.sorted(Comparator.comparingDouble(Midia::getAvaliacaoMedia).reversed())
+								.limit(10)
+								.collect(Collectors.toList());
+
+		midiasMaisAvaliadas.stream()
+							.forEach(
+								m -> System.out.println(m.getNome())
+							);
+		break;
+	case 4:
+		long clientes15Mais = this.clientes.values().stream()
+															.filter(c -> c.getQuatidadeAvaliacoes() >= 15)
+															.count();
+				System.out.println("A porcentagem dos clientes com pelo menos 15 avaliação: " + ((clientes15Mais*100) / this.clientes.size()));
+		break;
+	case 5:
+		System.out.println("As 10 mídias com mais visualizações: ");
+			this.midias.values().stream()
+								.sorted(Comparator.comparingDouble(Midia::getVizualizacoes).reversed())
+								.limit(10)
+								.forEach(
+									m -> System.out.println(m.getNome())
+								);
+		break;
+	case 6:
+		System.out.println("Selecione o gênero desejado: ");
+			
+		for (GenerosMidias genero : GenerosMidias.values()) {
+			System.out.printf("%d - %s \n", genero.ordinal()+1, genero.getGenero());
 		}
+
+		int opc = Integer.parseInt(sc.nextLine());
+			
+			System.out.println("As 10 mídias com mais visualizações: ");
+			this.midias.values().stream()
+								.filter(m -> m.getGenero().equals(GenerosMidias.getGeneroPorIndex(opc)))
+								.sorted(Comparator.comparingDouble(Midia::getVizualizacoes).reversed())
+								.limit(10)
+								.forEach(
+									m -> System.out.println(m.getNome())
+								);
+		break;
+	case 7:
+		System.out.println("Selecione o gênero desejado: ");
 		
+		for (GenerosMidias genero : GenerosMidias.values()) {
+			System.out.printf("%d - %s \n", genero.ordinal()+1, genero.getGenero());
+		}
+
+		int opt = Integer.parseInt(sc.nextLine());
+		
+		List<Midia> midiasMaisAvaliadasPorGenero = this.clientes.values().stream()
+									.flatMap(c -> c.getMidiasQueAvaliei().stream())
+									.filter(m -> m.getVizualizacoes() >= 100)
+									.collect(Collectors.toList()).stream()
+									.sorted(Comparator.comparingDouble(Midia::getAvaliacaoMedia).reversed())
+									.limit(10)
+									.collect(Collectors.toList());
+
+			midiasMaisAvaliadasPorGenero.stream()
+								.filter(m -> m.getGenero().equals(GenerosMidias.getGeneroPorIndex(opt)))
+								.forEach(
+									m -> System.out.println(m.getNome())
+								);
+		
+	break;
 	}
+	
+}
 	
 	private Object compareTo() {
 		return null;
 	}
 
-	public static Integer opcoesRelatorioGerenciais() {
+	public static Integer opcoesRelatoriosGerenciais() {
 		int opcao;
 		System.out.println("Escolha o número do  relatório gerencial que deseja consultar: \n"
 				+ "1 - Qual cliente assistiu mais mídias, e quantas mídias; \n"

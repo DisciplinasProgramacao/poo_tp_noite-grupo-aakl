@@ -177,4 +177,8 @@ public class Cliente implements IStringConverter {
 		return nome;
 	}
 
+	public ArrayList<Midia> getMidiasQueAvaliei() {
+        return midiasQueAvaliei;
+    }
+
 }
