@@ -8,11 +8,9 @@ import java.util.Map;
 
 public class LeitorCSV <T extends IStringConverter>{
     private static String line;
-    private static List<String> dadosList = new ArrayList<>(1000000);
-    private Map<String, T> dadosMap = new HashMap<>(1000000);
     
     public Map<String, T> lerCSV(IStringConverter dado, String arquivoCSV) {
-
+        Map<String, T> dadosMap = new HashMap<>(1000000);
         try (BufferedReader buffer = new BufferedReader(new FileReader(arquivoCSV))) {
             while ((line = buffer.readLine()) != null) {
                 IStringConverter objeto = dado.converterToObject(line); 
@@ -25,7 +23,7 @@ public class LeitorCSV <T extends IStringConverter>{
     }    
 
     public static List<String> lerCSV(String arquivoCSV) {
-
+        List<String> dadosList = new ArrayList<>(1000000);
         try (BufferedReader buffer = new BufferedReader(new FileReader(arquivoCSV))) {
             while ((line = buffer.readLine()) != null) {
                 dadosList.add(line);

@@ -49,7 +49,7 @@ public abstract class Midia implements IStringConverter{
 
 
 	public String getNome() {
-		return this.nome;
+		return nome;
 	}
 
 	public void setNome(String nome) {

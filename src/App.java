@@ -10,7 +10,7 @@ public class App {
      */
     public static void limparTela() {
 
-        System.out.print("\033[H\033[2J");
+        // System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
@@ -59,7 +59,13 @@ public class App {
             plataforma.relatoriosGerenciais();
             break;
 
+            case 7:
+            exibirListaMidia(true);
+            break;
 
+            case 8:
+            exibirListaMidia(false);
+            break;
         }
     }
 
@@ -104,13 +110,10 @@ public class App {
         }
     }
 
-
-
     private static int menu() {
         try {
             int op = -1;
             do {
-                limparTela();
                 System.out.println("******* Plataforma Streaming *********");
                 System.out.println("1. Adicionar mídia assistida");
                 System.out.println("2. Adicionar mídia à lista de interesses");
@@ -118,17 +121,20 @@ public class App {
                 System.out.println("4. Busca mídia na lista de interesse");
                 System.out.println("5. Avaliar");
                 System.out.println("6. Relatórios Gerenciais");
+                System.out.println("7. Exibir midias assistidas");
+                System.out.println("8. Exibir midias de interesse");
+                System.out.println("0. Sair");
                 op = Integer.parseInt(sc.nextLine());
 
-                if(op < 0 || op > 6)
+                if(op < 0 || op > 8)
                 {
                     limparTela();
                     System.out.println("Opção informada não existe. Tente novamente");
                     timer(2);
                 }
 
-            } while (op < 0 || op > 6);
-            
+            } while (op < 0 || op > 8);
+        
             return op;
         } catch (Exception e) {
             System.out.println("A opção '" + sc + "' não existe");
@@ -153,5 +159,16 @@ public class App {
             timer(2);
             autenticacao();
         }
+    }
+
+    private static void exibirListaMidia(boolean listaAssistida) {
+        List<String> midias = plataforma.exibirListaMidia(listaAssistida);
+        if(listaAssistida) {
+            System.out.println("Midias assitidas: ");
+        }
+        else {
+            System.out.println("Midias para assistir futuramente: ");
+        }
+        midias.forEach(midia -> System.out.printf("%s\n", midia));
     }
 }
