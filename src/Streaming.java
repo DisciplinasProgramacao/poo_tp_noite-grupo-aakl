@@ -161,12 +161,6 @@ public class Streaming {
 		}
 		
 	}
-	
-//	public void removerInteresse(String nome){
-//		Serie serie = this.series.get(nome);
-//		this.clienteLogado.getInteresses().removeIf(serie -> nome.equalsIgnoreCase(serie.getNome()));
-//����}
-
 
 public void relatoriosGerenciais() {
 	int opcao = opcoesRelatoriosGerenciais();
@@ -279,7 +273,7 @@ public void relatoriosGerenciais() {
 				+ "4 - Qual a porcentagem dos clientes com pelo menos 15 avaliações;\n" 
 				+ "5 - Quais são as 10 mídias com mais visualizações, em ordem decrescente;\n"
 				+ "6 - Quais são as 10 mídias com mais visualizações, em ordem decrescente e por gênero\n"
-				+ "7 - Quais são as 10 mídias com a melhor média de avaliações e que tenham sido vistas pelo menos 100 vezes, apresentadas em ordem decrescentee por gênero\n");
+				+ "7 - Quais são as 10 mídias com a melhor média de avaliações e que tenham sido vistas pelo menos 100 vezes, apresentadas em ordem decrescente por gênero\n");
 		opcao = sc.nextInt();
 		return opcao;
 	}
