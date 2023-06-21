@@ -120,14 +120,14 @@ public class App {
                 System.out.println("6. Relatórios Gerenciais");
                 op = Integer.parseInt(sc.nextLine());
 
-                if(op < 0 || op > 5)
+                if(op < 0 || op > 6)
                 {
                     limparTela();
                     System.out.println("Opção informada não existe. Tente novamente");
                     timer(2);
                 }
 
-            } while (op < 0 || op > 5);
+            } while (op < 0 || op > 6);
             
             return op;
         } catch (Exception e) {
