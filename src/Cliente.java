@@ -1,5 +1,7 @@
 import java.io.EOFException;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 /**
 	 * IMPLEMENTAÇÃO DAS REGRAS PARA AVALIAÇÃO DE MIDIAS:
 	 * 
@@ -181,4 +183,22 @@ public class Cliente implements IStringConverter {
         return midiasQueAvaliei;
     }
 
+	public List<String> getListaMidia(boolean listaAssistida) {
+		List<String> nomeMidias;
+		if(listaAssistida){
+			nomeMidias = mapListaMidias(assistidas);
+		}	
+		else {
+			nomeMidias = mapListaMidias(interesses);
+		}
+		return nomeMidias;
+	}
+
+	private List<String> mapListaMidias(List<Midia> midias) {
+		List<String> nomeMidias = new ArrayList<>();
+		for (Midia midia: midias) {
+			nomeMidias.add(midia.getNome());
+		}
+		return nomeMidias;
+	}
 }

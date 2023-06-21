@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class Streaming {
 	static Scanner sc = new Scanner(System.in);
-	private Map<String, Cliente> clientes;
-	private Map<String, Midia> midias;
+	private Map<String, Cliente> clientes = new HashMap<>(10000);
+	private Map<String, Midia> midias = new HashMap<>(10000);
 	private Cliente clienteLogado;
 	private Cliente clienteQueViuMaiorQuantidade = null;
 
@@ -25,7 +25,7 @@ public class Streaming {
 
 	private void carregarDados() {
 		LeitorCSV leitor = new LeitorCSV<IStringConverter>();
-
+		
 		clientes = leitor.lerCSV(new Cliente(), "dados/POO_Espectadores.csv");
 		midias = leitor.lerCSV(new Serie(), "dados/POO_Series.csv");
 		midias.putAll(leitor.lerCSV(new Filme(), "dados/POO_Filmes.csv"));
@@ -37,6 +37,7 @@ public class Streaming {
 
 	private void preencherAudiencia(List<String> dadosAudiencia) {
 		String[] valores;
+		this.clientes = clientes;
 		for (String audiencia : dadosAudiencia) {
 			valores = audiencia.split(";");
 			Cliente cliente = clientes.get(valores[0]);
@@ -51,8 +52,6 @@ public class Streaming {
 
 		}
 	}
-
-	
 
 	private void registrarReproducao(Cliente cliente, Midia serie) {
 		cliente.registraAssistida(serie);
@@ -276,6 +275,10 @@ public void relatoriosGerenciais() {
 				+ "7 - Quais são as 10 mídias com a melhor média de avaliações e que tenham sido vistas pelo menos 100 vezes, apresentadas em ordem decrescente por gênero\n");
 		opcao = sc.nextInt();
 		return opcao;
+	}
+
+	public List<String> exibirListaMidia(boolean listaAssistida) {
+		return clienteLogado.getListaMidia(listaAssistida);
 	}
 
 }
