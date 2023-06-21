@@ -86,4 +86,14 @@ public abstract class Midia implements IStringConverter{
 	public boolean isLancamento() {
 		return isLancamento;
 	}
+
+	public int getVizualizacoes(){
+        return this.contReproducoes;
+    }
+
+
+	public String getGenero() {
+			return genero;
+	}
+
 }
