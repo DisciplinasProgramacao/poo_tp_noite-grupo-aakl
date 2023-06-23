@@ -29,6 +29,10 @@ public class Streaming {
 		clientes = leitor.lerCSV(new Cliente(), "dados/POO_Espectadores.csv");
 		midias = leitor.lerCSV(new Serie(), "dados/POO_Series.csv");
 		midias.putAll(leitor.lerCSV(new Filme(), "dados/POO_Filmes.csv"));
+		for (String m : midias.keySet()) {
+			System.out.println(m);
+			
+		}
 	}
 
 	private List<String> carregarAudiencia() {
@@ -210,7 +214,7 @@ public void relatoriosGerenciais() {
 								.sorted(Comparator.comparingDouble(Midia::getVizualizacoes).reversed())
 								.limit(10)
 								.forEach(
-									m -> System.out.println(m.getNome())
+									m -> System.out.println(m.getNome()+" "+m.getVizualizacoes())
 								);
 		break;
 	case 6:

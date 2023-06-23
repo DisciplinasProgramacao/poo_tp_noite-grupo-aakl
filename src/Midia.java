@@ -57,7 +57,7 @@ public abstract class Midia implements IStringConverter{
 	}
 
 	public String getIdioma() {
-		return idioma;
+		return idMidia;
 	}
 
 	public void setIdioma(String idioma) {
@@ -72,7 +72,7 @@ public abstract class Midia implements IStringConverter{
 
 	@Override
 	public String getChave() {
-		return this.nome;
+		return this.idMidia;
 	}
 
 	/**

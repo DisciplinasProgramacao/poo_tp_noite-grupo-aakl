@@ -15,6 +15,7 @@ public class Cliente implements IStringConverter {
 	private String nome;
 	private String senha;
 	private int visualizacoes = 0;
+	
 	private ArrayList<Midia> midiasQueAvaliei = new ArrayList<Midia>();
 	private List<Midia> assistidas = new ArrayList<Midia>(50);
 	private List<Midia> interesses = new ArrayList<Midia>(50);
